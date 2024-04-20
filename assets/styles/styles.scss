@@ -1,0 +1,612 @@
+//abstracts*
+//------------------------------------
+
+//- Fonts
+@font-face {
+  font-family: 'NotoSans';
+  src: url('../fonts/noto/NotoSans.woff2') format('woff2'),
+  url('../fonts/noto/NotoSans.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyriadPro';
+  src: url('../fonts/myriad/MyriadProRegular.woff') format('woff2'),
+  url('../fonts/myriad/MyriadProRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter/Inter-Black.ttf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter/Inter-Regular.ttf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter/Inter-SemiBold.ttf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../fonts/manrope/Manrope-Regular.ttf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+//-Variables
+//----------
+//color for
+$primary: rgb(255, 255, 255);
+$secondary: rgb(0, 0, 0);
+$thirdly: #0146FE;
+$fourthly: #2A2B2F;
+
+$btn-active: #0146FE;
+$btn-not-active: #F4F6FD;
+$btn-hover: #4e7eff;
+$btn-pressed: #0346FE;
+
+
+$fourthly: #46586b;//label-date
+$fifthly: #46586b;
+
+//media for
+$viewport-4: 420px;
+$viewport-5: 480px;
+$viewport-5-6: 520px;
+$viewport-6: 576px;
+$viewport-7: 720px;
+// $viewport-8: 768px;
+$viewport-9:  900px;
+$viewport-10: 1024px;
+$viewport-13: 1280px;
+$viewport-15: 1440px;
+
+
+//$viewport-12: 1280px x 720 - main
+
+
+//-mixins
+@mixin flex($ai: stretch, $jc: flex-start, $fd: row, $fw: nowrap, $ac: stretch) {
+  display: flex;
+  align-items: $ai;
+  justify-content: $jc;
+  flex-direction: $fd;
+  flex-wrap: $fw;
+  align-content: $ac;
+}
+
+@mixin flexProps($ai: stretch, $jc: flex-start, $fd: row, $fw: nowrap, $ac: stretch) {
+  align-items: $ai;
+  justify-content: $jc;
+  flex-direction: $fd;
+  flex-wrap: $fw;
+  align-content: $ac;
+}
+
+@mixin size($w: none, $h: none) { //@mixin size($w: none, $h: $w)
+  width: $w;
+  height: $h;
+}
+
+@mixin padding ($pt: 0px, $pr: 0px, $pb: 0px, $pl: 0px){
+  padding: $pt $pr $pb $pl;
+}
+
+@mixin margin ($mt: 0px, $mr: 0px, $mb: 0px, $ml: 0px){
+  padding: $mt $mr $mb $ml;
+}
+
+@mixin font($ff, $fs, $lh, $fw, $c, $ls: normal) {
+  font-family: $ff, Arial, sans-serif;
+  font-size: $fs;
+  line-height: $lh;
+  font-weight: $fw;
+  color: $c;
+  letter-spacing: $ls;
+}
+
+@mixin bg-color($color) {
+  -moz-background-origin: $color;
+  -webkit-background-origin: $color;
+  background: $color;
+}
+
+@mixin width-w($width) {
+  width: $width*0.86;
+}
+
+@mixin height-add-w($height) {
+  height: $height*1.86;
+}
+
+@mixin height-w($height) {
+  height: $height*0.86;
+}
+
+@mixin font-w($size) {
+  font-size: $size*0.86;
+}
+
+@mixin padding-w($padding) {
+  padding-left: $padding*0.76;
+  padding-right: $padding*0.76;
+}
+
+//-placeholders
+
+%button {
+  width: 366px;
+  height: 64px;
+  background: $btn-active;
+  padding: 3px 7px;
+  @include font("Inter", 20px, 24px, 600, $primary);
+  border: 0;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+
+%button-slider-active {
+  width: auto;
+  height: 50px;
+  background: $btn-active;
+  padding: 0 30px;
+  @include font("Inter", 18px, 22px, 600, $primary);
+  border: 0;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+
+%button-slider-not-active {
+  width: auto;
+  height: 50px;
+  background: $btn-not-active;
+  padding: 0 30px;
+  @include font("Inter", 18px, 22px, 600, rgba($secondary, .8));
+  border: 0;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+
+
+//layout
+//------------------------------------
+
+html {
+  @include size(100%, 100%);
+}
+
+body {
+  @include flex(center, center, column, wrap);
+  @include size(auto,auto);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+header, footer {
+  @include size(100%, 80px);
+  background: $btn-not-active;
+}
+
+header {
+  margin-bottom: 80px;
+  @media screen and (max-width: $viewport-6) {
+    margin-bottom: 70px;
+  }
+}
+
+main {
+  @include size(100%, 100%);
+  max-width: 1280px; // width 1240px + padding 20+20;
+  @include flex(center, start, column, nowrap);
+  padding: 0 20px;
+}
+
+a {
+  color: $primary;
+  & :visited,
+  & :visited,
+  & :hover,
+  & :active,
+  & :link {
+    color: $primary;
+    text-decoration: none;
+  }
+}
+
+button:hover {
+  background: $btn-hover;
+  color: $primary;
+}
+
+.section {
+  @include flex(center, space-between, column);
+  margin-bottom: 80px;
+  @media screen and (max-width: $viewport-13) {
+    margin-bottom: 120px;
+  }
+  @media screen and (max-width: $viewport-6) {
+    margin-bottom: 90px;
+  }
+
+  &__header {
+    @include flex(center, space-between, column);
+    @include size(100%, 134px);
+    max-width: 800px;
+    text-align: center;
+  }
+
+  &__title {
+    @include font("Inter", 60px, 60px, 900, $secondary, -3px);
+    @media screen and (max-width: $viewport-9) {
+      @include font("Inter", 50px, 50px, 900, $secondary, -3.5px);
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include font("Inter", 36px, 36px, 900, $secondary, -1px);
+    }
+    @media screen and (max-width: $viewport-6) {
+      @include font("Inter", 32px, 32px, 900, $secondary, -1px);
+    }
+  }
+
+  &__description {
+    @include font("Manrope", 18px, 26px, 400, rgba($secondary, .8), 0.14px);
+    padding: 0 50px;
+  }
+
+  &__buttons {
+    @media screen and (max-width: $viewport-6) {
+      @include size(100%, auto);
+    }
+  }
+
+  &__button {
+    @extend %button;
+    @media screen and (max-width: $viewport-6) {
+      @include size(100%, 64px);
+      max-height: 366px;
+    }
+  }
+}
+
+.hospitality {
+  @include size(100%, 248px);
+  min-height: 248px;
+  @media screen and (max-width: $viewport-13) {
+    @include size(100%, auto);
+    min-height: 248px;
+  }
+
+  &__header {
+    @include size(100%, 144px);
+    max-width: 800px;
+    @media screen and (max-width: $viewport-6) {
+    @include size(100%, 100%);
+      min-height: 144px;
+    }
+  }
+
+  &__title {
+    @include font("Inter", 70px, 70px, 900, $secondary, -3.5px);
+    @media screen and (max-width: $viewport-9) {
+      @include font("Inter", 60px, 60px, 900, $secondary, -3.5px);
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include font("Inter", 46px, 46px, 900, $secondary, -1px);
+    }
+    @media screen and (max-width: $viewport-6) {
+      @include font("Inter", 42px, 42px, 900, $secondary, -1px);
+    }
+  }
+
+  &__description {
+    @include font("Manrope", 18px, 26px, 400, rgba($secondary, .8), -0.15px);
+    @media screen and (max-width: $viewport-13) {
+      padding: 20px 50px 40px;
+    }
+  }
+}
+
+.language {
+  @include size(100%, 754px);
+  min-height: 754px;
+  padding: 65px 0;
+  @media screen and (max-width: $viewport-13) {
+    @include size(100%, auto);
+    min-height: 585px;
+    padding: 0;
+  }
+
+  &__header {
+    @media screen and (max-width: $viewport-6) {
+      @include size(100%, 100%);
+      min-height: 134px;
+    }
+  }
+
+  &__description {
+    @media screen and (max-width: $viewport-13) {
+      padding: 20px 50px 40px;
+    }
+  }
+}
+
+.cards {
+  @include flex(center, space-between, row, nowrap);
+  @include size(100%, auto);
+  max-width: 1240px;
+
+  @media screen and (max-width: $viewport-10) {
+    @include flex(center, space-center, column, wrap);
+    padding-top: 50px;
+  }
+
+  @media screen and (max-width: $viewport-10) {
+
+    padding-top: 10px;
+  }
+
+}
+
+.card {
+  @include flex(center, space-between, column);
+  @include size(auto, 422px);
+  max-width: 400px;
+  text-align: center;
+  padding: 25px;
+  border: 1px  solid rgba($secondary, 0.04);
+  border-radius: 32px;
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+  @media screen and (max-width: $viewport-13) {
+    @include size(auto, 382px);
+  }
+  @media screen and (max-width: $viewport-10) {
+    @include size(auto, 422px);
+    padding: 30px;
+  }
+  @media screen and (max-width: $viewport-7) {
+    @include size(auto, 382px);
+    padding: 30px;
+  }
+  @media screen and (max-width: $viewport-6) {
+    @include size(auto, 362px);
+    padding: 30px;
+  }
+
+  &__title {
+    @include font("Inter", 34px, 34px, 900, $secondary, -1px);
+    margin-bottom: 11px;
+    @media screen and (max-width: $viewport-13) {
+      @include font("Inter", 28px, 28px, 900, $secondary, -1px);
+    }
+    @media screen and (max-width: $viewport-10) {
+      @include font("Inter", 34px, 34px, 900, $secondary, -1px);
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include font("Inter", 28px, 28px, 900, $secondary, -1px);
+      margin-bottom: 20px;
+    }
+    @media screen and (max-width: $viewport-6) {
+      @include font("Inter", 24px, 24px, 900, $secondary, -1px);
+    }
+  }
+
+  &__description {
+    @include font("Inter", 18px, 26px, 400, rgba($secondary, .8), -0.38px);
+  }
+
+  &__image {
+    @include size(100%, auto);
+  }
+
+  &.translation,
+  &.listening {
+    @media screen and (max-width: $viewport-13) {
+      margin-right: 20px;
+    }
+    @media screen and (max-width: $viewport-10) {
+      margin: 0 0 20px;
+    }
+  }
+}
+
+.product{
+  @include size(100%, 989px);
+  min-height: 940px;
+  padding-top: 70px;
+  @media screen and (max-width: $viewport-13) {
+    @include size(100%, auto);
+    padding: 0;
+  }
+
+  &__header {
+    @include size(100%, 168px);
+    max-width: 820px;
+    @media screen and (max-width: $viewport-13) {
+      @include size(100%, 100%);
+      min-height: 168px;
+    }
+  }
+
+  &__description {
+    padding: 0;
+    @media screen and (max-width: $viewport-13) {
+      padding: 20px 50px 40px;
+    }
+  }
+}
+
+.slider {
+  @include flex(center, space-between, column);
+  @include size(100%, 560px);
+  @media screen and (max-width: $viewport-10) {
+    @include size(100%, auto);
+  }
+
+  &__buttons {
+    @include flex(center, space-between);
+    @include size(631px, auto);
+    padding: 0 0 30px 0;
+    @media screen and (max-width: $viewport-10) {
+      padding: 70px 0 50px 0;
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include flex(center, space-between, column);
+      @include size(100%, auto);
+      min-height: 340px;
+      padding: 50px 0;
+    }
+    @media screen and (max-width: $viewport-6) {
+      min-height: 315px;
+    }
+  }
+
+  &__button {
+    @extend %button-slider-not-active;
+
+    &.active-bth {
+      @extend %button-slider-active;
+    }
+
+    &.travelers,
+    &.employees,
+    &.organization {
+      @media screen and (max-width: $viewport-7) {
+        @include size(100%, 64px);
+      }
+    }
+  }
+
+  &__slides {
+    @include flex(center, center, column);
+    @include size(100%, auto);
+    width: 100%;
+    margin-left: 18px;
+    @media screen and (max-width: $viewport-13) {
+      margin-left: 0;
+    }
+    @media screen and (max-width: $viewport-10) {
+      margin: 0 0 70px;
+    }
+  }
+}
+
+.slide {
+  display:none;
+  @include flexProps(center, space-between);
+  @include size(100%, 422px);
+  max-width: 1137px;
+  padding: 40px;
+  border: 1px  solid rgba($secondary, 0.04);
+  border-radius: 32px;
+  box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.14);
+  @media screen and (max-width: $viewport-10) {
+    @include flexProps(center, center, row, wrap);
+    @include size(100%, auto);
+    max-width: 631px;
+  }
+
+  &__header{
+    @include size(435px, 100%);
+     @media screen and (max-width: $viewport-10) {
+       @include size(100%, 100%);
+       min-height: 300px;
+       margin-bottom: 55px;
+     }
+  }
+
+  &__title {
+    @include font("Inter", 60px, 60px, 900, $secondary, -3px);
+    margin-bottom: 33px;
+    @media screen and (max-width: $viewport-9) {
+      @include font("Inter", 50px, 50px, 900, $secondary, -3.5px);
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include font("Inter", 36px, 36px, 900, $secondary, -1px);
+    }
+    @media screen and (max-width: $viewport-7) {
+      @include font("Inter", 32px, 32px, 900, $secondary, -1px);
+    }
+  }
+
+  &__description {
+    padding-left: 30px;
+  }
+
+  &__description-item {
+    @include font("Inter", 18px, 25px, 400, rgba($fourthly, .8), -0.39px);
+    list-style-type: disc;
+  }
+
+  &__image {
+    @include size(100%, auto);
+    border-radius: 32px;
+  }
+
+  &.active-slide {
+    display:flex;
+  }
+
+  &__fake1-outer,
+  &__fake2-outer {
+    @include flex(center, center, column);
+    max-width: 1137px;
+    width: 100%;
+  }
+
+  &__fake1-outer {
+    padding: 0 50px;
+    & .fake1  {
+      @include flex(center, space-between);
+      @include size(100%, 28px);
+      max-width: 1035px;
+      padding: 0;
+      border: 1px solid rgba($secondary, 0.04);
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.11);
+      @media screen and (max-width: $viewport-10) {
+        max-width: 535px;
+      }
+      @media screen and (max-width: $viewport-6) {
+        padding: 0 30px;
+      }
+    }
+  }
+
+  &__fake2-outer {
+    padding: 0 85px;
+    & .fake2  {
+      @include flex(center, space-between);
+      @include size(100%, 28px);
+      max-width: 965px;
+      padding: 0;
+      border: 1px solid rgba($secondary, 0.04);
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.08);
+      @media screen and (max-width: $viewport-10) {
+        max-width: 465px;
+      }
+      @media screen and (max-width: $viewport-6) {
+        padding: 0 80px;
+      }
+    }
+  }
+}
